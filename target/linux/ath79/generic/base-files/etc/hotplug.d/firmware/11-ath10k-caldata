@@ -43,6 +43,7 @@ case "$FIRMWARE" in
 	ubnt,powerbeam-5ac-500|\
 	ubnt,powerbeam-5ac-gen2|\
 	ubnt,unifiac-pro|\
+	xiaomi,aiot-ac2350|\
 	yuncore,a770)
 		caldata_extract "art" 0x5000 0x844
 		;;

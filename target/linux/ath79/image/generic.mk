@@ -2189,6 +2189,15 @@ define Device/xiaomi_mi-router-4q
 endef
 TARGET_DEVICES += xiaomi_mi-router-4q
 
+define Device/xiaomi_aiot-ac2350
+  SOC := qca9563
+  DEVICE_VENDOR := Xiaomi
+  DEVICE_MODEL := AIoT AC2350
+  DEVICE_PACKAGES := kmod-usb2 kmod-ath10k-ct ath10k-firmware-qca9984-ct
+  IMAGE_SIZE := 14336k
+endef
+TARGET_DEVICES += xiaomi_aiot-ac2350
+
 define Device/yuncore_a770
   SOC := qca9531
   DEVICE_VENDOR := YunCore

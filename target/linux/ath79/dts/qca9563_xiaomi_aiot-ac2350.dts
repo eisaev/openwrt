@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+
+#include "qca9563_xiaomi_aiot-ac2350.dtsi"
+
+/ {
+	model = "Xiaomi AIoT AC2350";
+	compatible = "xiaomi,aiot-ac2350", "qca,qca9563";
+};
