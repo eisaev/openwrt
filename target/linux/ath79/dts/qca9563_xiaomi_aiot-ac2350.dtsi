@@ -126,6 +126,8 @@
 	phy0: ethernet-phy@0 {
 		reg = <0>;
 		phy-mode = "sgmii";
+//		qca,mib-poll-interval = <500>;
+
 		qca,ar8327-initvals = <
 			0x04 0x00000080 /* PORT0 PAD MODE CTRL */
 			0x08 0x01000000 /* PORT5 PAD MODE CTRL */
@@ -145,17 +147,13 @@
 &eth0 {
 	status = "okay";
 
-	phy-handle = <&phy0>;
+//	pll-data = <0x03000101 0x00000101 0x00001919>;
+
 	phy-mode = "sgmii";
+	phy-handle = <&phy0>;
 
 	mtd-mac-address = <&art 0x0>;
 };
-
-//&eth1 {
-//	status = "okay";
-//
-//	mtd-mac-address = <&art 0x6>;
-//};
 
 &wmac {
 	status = "okay";

@@ -443,7 +443,7 @@ ath79_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"0@eth0" "3:lan:1" "4:lan:2"
 		;;
-	xiaomi,mi-router-ac2350)
+	xiaomi,aiot-ac2350)
 		ucidef_add_switch "switch0" \
 			"0@eth0" "2:lan" "3:lan" "4:lan" "1:wan"
 		;;
