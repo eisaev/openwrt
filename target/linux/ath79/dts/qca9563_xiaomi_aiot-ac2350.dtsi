@@ -34,22 +34,22 @@
 
 		led_system_blue: system_blue {
 			label = "system:blue";
-			gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
 		};
 
 		led_system_orange: system_orange {
 			label = "system:orange";
-			gpios = <&gpio 7 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_blue {
 			label = "wan:blue";
-			gpios = <&gpio 8 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_orange {
 			label = "wan:orange";
-			gpios = <&gpio 15 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		usbreset {
@@ -121,30 +121,33 @@
 &mdio0 {
 	status = "okay";
 
-	phy-mask = <0>;
+	phy-mask = <0x1>;
 
 	phy0: ethernet-phy@0 {
 		reg = <0>;
 		phy-mode = "sgmii";
-		qca,mib-poll-interval = <500>;
-
 		qca,ar8327-initvals = <
-			0x04 0x00000080	/* PORT0 PAD MODE CTRL */
-			0x7c 0x0000007e	/* PORT0_STATUS */
-			>;
+			0x04 0x00080080 /* PAD0 */
+			0x7c 0x0000007e /* PORT0_STATUS */
+			0xe0 0xc74164de /* SGMII_CTRL */
+		>;
 	};
 };
 
 &eth0 {
 	status = "okay";
 
-	pll-data = <0x03000101 0x00000101 0x00001919>;
+	phy-handle = <&phy0>;
+	phy-mode = "sgmii";
 
 	mtd-mac-address = <&art 0x0>;
-
-	phy-mode = "sgmii";
-	phy-handle = <&phy0>;
 };
+
+//&eth1 {
+//	status = "okay";
+//
+//	mtd-mac-address = <&art 0x6>;
+//};
 
 &wmac {
 	status = "okay";
