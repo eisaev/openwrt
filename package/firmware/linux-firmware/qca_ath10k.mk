@@ -1,9 +1,6 @@
 QCA99X0_BOARD_REV:=ddcec9efd245da9365c474f513a855a55f3ac7fe
 QCA99X0_BOARD_FILE:=board-2.bin.$(QCA99X0_BOARD_REV)
 
-QCA9988_BOARD_REV:=222cb2ac8b85bf881eea2f38ecfb205bab7c48b0
-QCA9988_BOARD_FILE:=board-2.bin.$(QCA9988_BOARD_REV)
-
 define Download/qca99x0-board
   URL:=https://source.codeaurora.org/quic/qsdk/oss/firmware/ath10k-firmware/plain/ath10k/QCA99X0/hw2.0
   URL_FILE:=board-2.bin?id=$(QCA99X0_BOARD_REV)
@@ -11,14 +8,6 @@ define Download/qca99x0-board
   HASH:=03711ac21e60ef59d3815e235eb721c0c22851b5410299411085aa6f2af45401
 endef
 $(eval $(call Download,qca99x0-board))
-
-define Download/qca9988-board
-  URL:=https://github.com/eisaev/r2350/blob/$(QCA9988_BOARD_REV)/fw
-  URL_FILE:=board-2.bin?raw=true
-  FILE:=$(QCA9988_BOARD_FILE)
-  HASH:=e6dc2213e3cc6a47d7d7efc8cd60fc1970897a4413f316527bb6cea20d618e7c
-endef
-$(eval $(call Download,qca9988-board))
 
 Package/ath10k-board-qca4019 = $(call Package/firmware-default,ath10k qca4019 board firmware)
 define Package/ath10k-board-qca4019/install
@@ -143,20 +132,3 @@ define Package/ath10k-firmware-qca9984/install
 		$(1)/lib/firmware/ath10k/QCA9984/hw1.0/firmware-5.bin
 endef
 $(eval $(call BuildPackage,ath10k-firmware-qca9984))
-
-Package/ath10k-board-qca9988 = $(call Package/firmware-default,ath10k qca9988 board firmware)
-define Package/ath10k-board-qca9988/install
-	$(INSTALL_DIR) $(1)/lib/firmware/ath10k/QCA9984/hw1.0
-	$(INSTALL_DATA) \
-		$(DL_DIR)/$(QCA9988_BOARD_FILE) \
-		$(1)/lib/firmware/ath10k/QCA9984/hw1.0/board-2.bin
-endef
-$(eval $(call BuildPackage,ath10k-board-qca9988))
-Package/ath10k-firmware-qca9988 = $(call Package/firmware-default,ath10k qca9988 firmware,+ath10k-board-qca9988)
-define Package/ath10k-firmware-qca9988/install
-	$(INSTALL_DIR) $(1)/lib/firmware/ath10k/QCA9984/hw1.0
-	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/ath10k/QCA9984/hw1.0/firmware-5.bin \
-		$(1)/lib/firmware/ath10k/QCA9984/hw1.0/firmware-5.bin
-endef
-$(eval $(call BuildPackage,ath10k-firmware-qca9988))
