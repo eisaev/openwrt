@@ -407,6 +407,10 @@ yuncore,a770)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1"
 	ucidef_set_led_switch "lan" "LAN" "green:lan" "switch0" "0x10"
 	;;
+xiaomi,aiot-ac2350)
+	ucidef_set_led_switch "wan_link" "WAN Link" "blue:wan" "switch0" "0x02" "0x0c"
+	ucidef_set_led_netdev "wan_data" "WAN Data" "orange:wan" "eth0.2" "tx rx"
+	;;
 zbtlink,zbt-wd323)
 	ucidef_set_led_switch "lan1" "LAN1" "orange:lan1" "switch0" "0x10"
 	ucidef_set_led_switch "lan2" "LAN2" "orange:lan2" "switch0" "0x08"

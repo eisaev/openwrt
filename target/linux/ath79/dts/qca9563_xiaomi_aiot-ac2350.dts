@@ -10,20 +10,16 @@
 	compatible = "xiaomi,aiot-ac2350", "qca,qca9563";
 
 	aliases {
-		led-boot = &led_system_orange;
-		led-failsafe = &led_system_orange;
-		led-running = &led_system_blue;
-		led-upgrade = &led_system_orange;
+		label-mac-device = &eth0;
+
+		led-boot = &led_orange_system;
+		led-failsafe = &led_orange_system;
+		led-running = &led_blue_system;
+		led-upgrade = &led_orange_system;
 	};
 
 	keys {
 		compatible = "gpio-keys";
-
-		wps {
-			label = "wps";
-			linux,code = <KEY_WPS_BUTTON>;
-			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
-		};
 
 		reset {
 			label = "reset";
@@ -35,28 +31,39 @@
 	leds: leds {
 		compatible = "gpio-leds";
 
-		led_system_blue: system_blue {
-			label = "system:blue";
+		led_blue_system: blue_system {
+			label = "blue:system";
 			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
 		};
 
-		led_system_orange: system_orange {
-			label = "system:orange";
+		led_orange_system: orange_system {
+			label = "orange:system";
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
-		wan_blue {
-			label = "wan:blue";
+		blue_wan {
+			label = "blue:wan";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
-		wan_orange {
-			label = "wan:orange";
+		orange_wan {
+			label = "orange:wan";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
+	};
 
-		usbreset {
-			label = "usbreset";
+	gpio-export {
+		compatible = "gpio-export";
+
+		gpio_wps {
+			gpio-export,name = "wps";
+			gpio-export,output = <0>;
+			gpios = <&gpio 1 GPIO_ACTIVE_HIGH>;
+		};
+
+		gpio_usbreset {
+			gpio-export,name = "usbreset";
+			gpio-export,output = <0>;
 			gpios = <&gpio 19 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -68,7 +75,7 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
-		spi-max-frequency = <25000000>;
+		spi-max-frequency = <50000000>;
 
 		partitions {
 			compatible = "fixed-partitions";
